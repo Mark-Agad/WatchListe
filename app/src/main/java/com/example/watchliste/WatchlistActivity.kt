@@ -9,7 +9,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class WatchlistActivity : AppCompatActivity() {
 
-    // 1. YOUR WATCHLIST (To Watch)
+
     val watchlistMovies = mutableListOf(
         Movie("Spider-Man", "Animation", "", "A story about Miles Morales discovering the multiverse."),
         Movie("The Dark Knight", "Action", "", "Batman faces his greatest psychological test against the Joker."),
@@ -25,7 +25,7 @@ class WatchlistActivity : AppCompatActivity() {
         Movie("The Legend of Hei", "Animation", "", "A young cat spirit goes on a journey to find a new home.")
     )
 
-    // 2. YOUR WATCHED LIST
+
     val watchedMovies = mutableListOf(
         Movie("3 Idiots", "Comedy/Drama", "4.9", "Two friends search for their long-lost companion."),
         Movie("Inception", "Sci-Fi", "4.8", "A thief who steals secrets through dream-sharing."),
@@ -36,26 +36,26 @@ class WatchlistActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_watchlist)
 
-        // Enable the Back Arrow in the top bar
+
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val rvWatchlist = findViewById<RecyclerView>(R.id.rvWatchlist)
         val tvHeader = findViewById<TextView>(R.id.tvHeader)
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
 
-        // --- FIX: Force the highlight to stay on Watchlist when entering this activity ---
+
         bottomNav.selectedItemId = R.id.nav_watchlist
 
         rvWatchlist.layoutManager = LinearLayoutManager(this)
 
-        // Default view: Show the Watchlist
+
         rvWatchlist.adapter = MovieAdapter(watchlistMovies)
 
-        // Logic to swap lists or go home
+
         bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_home -> {
-                    finish() // Goes back to MainActivity
+                    finish()
                     true
                 }
                 R.id.nav_watchlist -> {
