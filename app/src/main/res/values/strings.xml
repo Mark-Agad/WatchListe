@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">WatchListe</string>
+    <string name="rating_format">⭐ %1$s</string>
 </resources>

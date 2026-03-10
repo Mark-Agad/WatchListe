@@ -34,7 +34,8 @@
                 android:id="@+id/etMovieTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="#FFFFFF" />
+                android:textColor="#FFD700" />
+
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -45,12 +46,18 @@
             android:textColor="#B3B3B3"
             android:textSize="12sp" />
 
-        <Spinner
-            android:id="@+id/spinnerGenre"
+        <TextView
+            android:id="@+id/tvGenreSelector"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="55dp"
             android:layout_marginTop="8dp"
-            android:backgroundTint="#FFD700" />
+            android:background="@android:drawable/editbox_background"
+            android:backgroundTint="#333333"
+            android:gravity="center_vertical"
+            android:paddingStart="12dp"
+            android:text="Select Genres"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnSave"

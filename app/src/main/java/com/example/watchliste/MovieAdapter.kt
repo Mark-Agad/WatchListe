@@ -25,13 +25,20 @@ class MovieAdapter(private val movieList: MutableList<Movie>) :
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         val movie = movieList[position]
+        val context = holder.itemView.context
 
         holder.tvTitle.text = movie.title
         holder.tvGenre.text = movie.genre
-        holder.tvRating.text = "⭐ ${movie.rating}"
+
+        // FIXED: Removed safe calls/unnecessary checks that trigger "call on not null type"
+        if (movie.rating.isEmpty()) {
+            holder.tvRating.visibility = View.GONE
+        } else {
+            holder.tvRating.visibility = View.VISIBLE
+            holder.tvRating.text = context.getString(R.string.rating_format, movie.rating)
+        }
 
         holder.itemView.setOnClickListener {
-            val context = holder.itemView.context
             val intent = Intent(context, MovieDetailsActivity::class.java).apply {
                 putExtra("MOVIE_TITLE", movie.title)
                 putExtra("MOVIE_GENRE", movie.genre)
@@ -42,11 +49,10 @@ class MovieAdapter(private val movieList: MutableList<Movie>) :
         }
 
         holder.btnDelete.setOnClickListener {
-            val currentPosition = holder.adapterPosition
+            val currentPosition = holder.bindingAdapterPosition
             if (currentPosition != RecyclerView.NO_POSITION) {
                 movieList.removeAt(currentPosition)
                 notifyItemRemoved(currentPosition)
-                // This keeps the list indices in sync after a deletion
                 notifyItemRangeChanged(currentPosition, movieList.size)
             }
         }
